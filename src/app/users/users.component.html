@@ -1,0 +1,67 @@
+<td-layout-nav  navigationRoute="/">
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>{{config.MODULE_NAME}}</span>
+    <span flex></span>
+  </div>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <span flex>Действия</span>
+        <button mat-icon-button [routerLink]="['add']">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
+          <!--<mat-icon>sort</mat-icon>-->
+        <!--</button>-->
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push']">
+    <!--<td-search-box class="push-left push-right" placeholder="search" [alwaysVisible]="true"-->
+                   <!--(searchDebounce)="filterLeads($event)"></td-search-box>-->
+
+    <!--<td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Строка поиска"-->
+                   <!--(searchDebounce)="search($event)" flex>-->
+    <!--</td-search-box>-->
+    <!--<mat-divider></mat-divider>-->
+    <div >
+      <td-data-table
+        #dataTable
+        [data]="positions"
+        [columns]="columns"
+        [selectable]="true"
+        [multiple]="true"
+        [sortable]="true"
+        [clickable]="true"
+        [sortBy]="sortField"
+        [sortOrder]="sortOrder"
+        [(ngModel)]="selectedRows"
+        (sortChange)="sort($event)"
+        (rowClick)="editRow($event)"
+        [style.height.px]="500">
+      </td-data-table>
+
+      <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center" >
+        <h3>No results to display.</h3>
+      </div>
+    </div>
+    <!--<td-paging-bar #pagingBar [pageSize]="2"-->
+                   <!--(change)="page($event)">-->
+      <!--&lt;!&ndash;<span td-paging-bar-label hide-xs>Row per page:</span>&ndash;&gt;-->
+      <!--&lt;!&ndash;{{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>&ndash;&gt;-->
+    <!--</td-paging-bar>-->
+
+    <!--<td-paging-bar #pagingBar pageLinkCount="3"-->
+                   <!--[initialPage]="1" [pageSize]="pageSize" [total]="total"-->
+                   <!--(change)="change($event)">-->
+      <!--<span td-paging-bar-label hide-xs>Row per page:</span>-->
+      <!--{{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>-->
+    <!--</td-paging-bar>-->
+  </mat-card>
+</td-layout-nav>

@@ -1,0 +1,149 @@
+<td-layout-nav navigationRoute="/">
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>{{config.MODULE_NAME}}</span>
+    <span flex></span>
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <span *ngIf="action == 'edit'">Редактирование сотрудника </span>
+        <span *ngIf="action == 'add'">Создание сотрудника</span>
+        <span flex></span>
+        <!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
+        <!--<mat-icon>sort</mat-icon>-->
+        <!--</button>-->
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push']">
+
+    <!--<mat-card-title *ngIf="action == 'view'">View {{lead.companyName}}</mat-card-title>-->
+    <!--<mat-card-title *ngIf="action == 'edit'">Edit {{lead.companyName}}</mat-card-title>-->
+    <!--<mat-card-title *ngIf="action == 'add'">Create new Lead</mat-card-title>-->
+    <!--<mat-divider></mat-divider>-->
+    <mat-card-content class="push-bottom-none">
+      <form [formGroup]="userForm">
+
+
+          <mat-form-field [style.width]="'90%'">
+            <input matInput
+                   type="text"
+                   placeholder="Фамилия"
+                   formControlName="lastName"
+                   maxlength="90"
+                   required>
+          </mat-form-field>
+
+
+
+          <mat-form-field [style.width]="'90%'">
+            <input matInput
+                   type="text"
+                   placeholder="Имя"
+                   formControlName="firstName"
+                   maxlength="90"
+                   required>
+          </mat-form-field>
+
+
+        <div class="container" >
+          <mat-form-field [style.width]="'90%'">
+            <mat-select placeholder="Должность"
+                        formControlName="position">
+              <mat-option *ngFor="let position of positions" [value]="position.name">{{position.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field [style.width]="'90%'">
+          <input matInput
+                 type="text"
+                 placeholder="Номер телефон +7(999)999-99-99"
+                 [textMask]="{mask: phoneNumberMask}"
+                 formControlName="phone"
+                 maxlength="90"
+                 required>
+        </mat-form-field>
+
+
+        <!--<div class="container">-->
+        <!--<mat-form-field>-->
+        <!--<input matInput-->
+        <!--type="text"-->
+        <!--placeholder="Company Name"-->
+        <!--formControlName="companyName"-->
+        <!--maxlength="255"-->
+        <!--required>-->
+        <!--</mat-form-field>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;<div layout="row" [formGroup]="editLeadForm">&ndash;&gt;-->
+        <!--&lt;!&ndash;<mat-input-container flex>&ndash;&gt;-->
+        <!--&lt;!&ndash;<input matInput&ndash;&gt;-->
+        <!--&lt;!&ndash;type="text"&ndash;&gt;-->
+        <!--&lt;!&ndash;placeholder="Company Url"&ndash;&gt;-->
+        <!--&lt;!&ndash;formControlName="companyUrl"&ndash;&gt;-->
+        <!--&lt;!&ndash;maxlength="255"&ndash;&gt;-->
+        <!--&lt;!&ndash;required>&ndash;&gt;-->
+        <!--&lt;!&ndash;</mat-input-container>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <!--<mat-form-field>-->
+        <!--<input matInput-->
+        <!--type="text"-->
+        <!--placeholder="Contact First Name"-->
+        <!--formControlName="contactFirstName"-->
+        <!--maxlength="255"-->
+        <!--required>-->
+        <!--</mat-form-field>-->
+
+        <!--<mat-form-field>-->
+        <!--<input matInput-->
+        <!--type="text"-->
+        <!--placeholder="Contact Last Name"-->
+        <!--formControlName="contactLastName"-->
+        <!--maxlength="255"-->
+        <!--required>-->
+        <!--</mat-form-field>-->
+
+        <!--<mat-form-field>-->
+        <!--<input matInput-->
+        <!--type="text"-->
+        <!--placeholder="Contact E-mail"-->
+        <!--formControlName="contactEmail"-->
+        <!--maxlength="255"-->
+        <!--required>-->
+        <!--</mat-form-field>-->
+
+        <!--<div type="row" style="padding-bottom: 20px;">-->
+        <!--<mat-checkbox formControlName="haveAddress">I have an address</mat-checkbox>-->
+        <!--</div>-->
+
+
+        <!--<aio-address *ngIf="lead.haveAddress"-->
+        <!--[addressType]="addressType"-->
+        <!--[lead]="lead"-->
+        <!--(onAddressChange)="onAddressChange($event)"></aio-address>-->
+
+
+        <!--<aio-phone [phone]="workPhone" (onPhoneNumChange)="onWorkPhoneChange($event)"></aio-phone>-->
+        <!--<aio-phone [phone]="mobilePhone" (onPhoneNumChange)="onMobilePhoneChange($event)"></aio-phone>-->
+
+
+      </form>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button *ngIf="action !== 'view'" mat-button [disabled]="!userForm.valid" color="primary"
+              (click)="save()">Сохранить
+      </button>
+
+      <button mat-button (click)="goBack()">Отмена</button>
+    </mat-card-actions>
+
+  </mat-card>
+</td-layout-nav>
